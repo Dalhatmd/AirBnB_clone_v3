@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+""" states views """
 from api.v1.views import app_views
 from models import storage
 from flask import Flask, abort, request, jsonify
@@ -12,7 +13,9 @@ def get_states():
     states = [state.to_dict() for state in states.values()]
     return jsonify(states)
 
-@app_views.route('/states/<string:state_id>', methods=['GET'], strict_slashes=False)
+
+@app_views.route('/states/<string:state_id>', methods=['GET'],
+                 strict_slashes=False)
 def get_state(state_id):
     """Get a state by id"""
     state = storage.get(State, state_id)
@@ -20,7 +23,9 @@ def get_state(state_id):
         return jsonify(state.to_dict())
     abort(404)
 
-@app_views.route('/states/<string:state_id>', methods=['DELETE'], strict_slashes=False)
+
+@app_views.route('/states/<string:state_id>', methods=['DELETE'],
+                 strict_slashes=False)
 def del_state(state_id):
     """ deletes a state by id"""
     state = storage.get(State, state_id)
@@ -43,7 +48,8 @@ def post_state():
     return jsonify(state.to_dict()), 200
 
 
-@app_views.route('/states/<string:state_id>', methods=['PUT'], strict_slashes=False)
+@app_views.route('/states/<string:state_id>', methods=['PUT'],
+                 strict_slashes=False)
 def update_state(state_id):
     """ updates a state by id """
     state = storage.get(State, state_id)

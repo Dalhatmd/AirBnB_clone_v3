@@ -13,8 +13,10 @@ def close_storage(exception):
     """ close storage """
     storage.close()
 
+
 @app.errorhandler(404)
 def not_found(error):
+    """ handles not found error """
     return jsonify({"error": "Not found"}), 404
 
 
