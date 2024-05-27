@@ -2,7 +2,7 @@
 """ states views """
 from api.v1.views import app_views
 from models import storage
-from flask import Flask, abort, request, jsonify, make_request
+from flask import Flask, abort, request, jsonify, make_response
 from models.state import State
 
 
@@ -40,9 +40,9 @@ def del_state(state_id):
 def post_state():
     """ creates a state """
     if not request.get_json():
-        return make_request(jsonify({"error": "Not a JSON"}), 400)
+        return make_response(jsonify({"error": "Not a JSON"}), 400)
     if 'name' not in request.get_json():
-        return make_request(jsonify({"error": "Missing name"}), 400)
+        return make_response(jsonify({"error": "Missing name"}), 400)
     state = State(**request.get_json())
     state.save()
     return jsonify(state.to_dict()), 200
@@ -56,7 +56,7 @@ def update_state(state_id):
     if not state:
         abort(404)
     if not request.get_json():
-        return make_request(jsonify({"error": "Not a JSON"}), 400)
+        return make_response(jsonify({"error": "Not a JSON"}), 400)
     for key, value in request.get_json().items():
         if key not in ['id', 'created_at', 'updated_at']:
             setattr(state, key, value)
