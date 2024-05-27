@@ -25,6 +25,10 @@ class BaseModel:
         id = Column(String(60), primary_key=True)
         created_at = Column(DateTime, default=datetime.utcnow)
         updated_at = Column(DateTime, default=datetime.utcnow)
+        __table_args__ = {
+            'mysql_charset': 'latin1',
+            'mysql_collate': 'latin1_swedish_ci'
+             }
 
     def __init__(self, *args, **kwargs):
         """Initialization of the base model"""
