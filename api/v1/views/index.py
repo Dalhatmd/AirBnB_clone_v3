@@ -3,16 +3,15 @@
 from models import storage
 from api.v1.views import app_views
 from flask import jsonify
-app = app_views
 
 
-@app.route('/status', strict_slashes=False)
+@app_views.route('/status', strict_slashes=False)
 def status():
     """ returns the status """
     return (jsonify({'status': 'OK'}))
 
 
-@app.route('/stats', strict_slashes=False)
+@app_views.route('/stats', strict_slashes=False)
 def stats():
     """ returns count of all objects """
     return jsonify({"amenities": storage.count("Amenity"),
