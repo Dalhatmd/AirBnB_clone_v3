@@ -2,7 +2,7 @@
 """ reviews view """
 from api.v1.views import app_views
 from models import storage
-from models import Review
+from models.review import Review
 from flask import Flask, jsonify, abort
 
 

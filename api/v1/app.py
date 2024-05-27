@@ -1,11 +1,13 @@
 #!/usr/bin/python3
 """ return endpoint of flask app """
 from flask import Flask, abort, jsonify
+from flask_cors import CORS
 from models import storage
 from api.v1.views import app_views
 import os
 app = Flask(__name__)
 app.register_blueprint(app_views)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 
 @app.teardown_appcontext
