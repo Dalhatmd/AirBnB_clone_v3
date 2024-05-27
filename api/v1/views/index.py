@@ -19,7 +19,8 @@ def stats():
                     "reviews": storage.count("Review"),
                     "places": storage.count("Place"),
                     "cities": storage.count("City"),
-                    "amenities": storage.count("Amenity")})
+                    "amenities": storage.count("Amenity"),
+                    "states": storage.count("State")})
 
 
 if __name__ == "__main__":
