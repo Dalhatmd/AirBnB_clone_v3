@@ -15,12 +15,12 @@ def status():
 @app.route('/stats', strict_slashes=False)
 def stats():
     """ returns count of all objects """
-    return jsonify({"users": storage.count("User"),
-                    "reviews": storage.count("Review"),
-                    "places": storage.count("Place"),
+    return jsonify({"amenities": storage.count("Amenity"),
                     "cities": storage.count("City"),
-                    "amenities": storage.count("Amenity"),
-                    "states": storage.count("State")})
+                    "places": storage.count("Place"),
+                    "reviews": storage.count("Review"),
+                    "states": storage.count("State"),
+                    "users": storage.count("User")})
 
 
 if __name__ == "__main__":
