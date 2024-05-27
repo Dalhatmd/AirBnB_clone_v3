@@ -43,9 +43,9 @@ def create_city(state_id):
     if state is None:
         abort(404)
     if not request.get_json():
-        abort(400, 'Not a JSON')
+        return make_response(jsonify({'error': 'Not a JSON'}),400)
     if 'name' not in request.json:
-        abort(400, 'Missing name')
+        return make_response(jsonify({'error': 'Missing name'}),400)
     city = City(name=request.json['name'], state_id=state_id)
     storage.new(city)
     storage.save()
@@ -58,7 +58,7 @@ def update_city(city_id):
     if city is None:
         abort(404)
     if not request.get_json():
-        abort(400, 'Not a JSON')
+        return make_response(jsonify({'error': 'Not a JSON'}),400)
     for key, value in request.get_json().items():
         if not key in ['id', 'created_at', 'updated_at']:
             setattr(city, key, value)
