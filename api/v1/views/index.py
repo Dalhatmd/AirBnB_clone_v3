@@ -2,28 +2,25 @@
 """ index view """
 from models import storage
 from api.v1.views import app_views
-from flask import Flask
 from flask import jsonify
-from models.amenity import Amenity
-from models.city import City
-from models.place import Place
-from models.review import Review
-from models.state import State
-from models.user import User
+app = app_views
 
 
-@app_views.route('/status', strict_slashes=False)
+@app.route('/status', strict_slashes=False)
 def status():
     """ returns the status """
     return (jsonify({'status': 'OK'}))
 
 
-@app_views.route('/stats', strict_slashes=False)
+@app.route('/stats', strict_slashes=False)
 def stats():
     """ returns count of all objects """
-    return jsonify({"amenities": storage.count(Amenity),
-                    "cities": storage.count(City),
-                    "places": storage.count(Place),
-                    "reviews": storage.count(Review),
-                    "states": storage.count(State),
-                    "users": storage.count(User)})
+    return jsonify({"users": storage.count("User"),
+                    "reviews": storage.count("Review"),
+                    "places": storage.count("Place"),
+                    "cities": storage.count("City"),
+                    "amenities": storage.count("Amenity")})
+
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5000)
