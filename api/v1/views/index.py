@@ -2,6 +2,7 @@
 """ index view """
 from models import storage
 from api.v1.views import app_views
+from flask import Flask
 from flask import jsonify
 
 
@@ -20,7 +21,3 @@ def stats():
                     "reviews": storage.count("Review"),
                     "states": storage.count("State"),
                     "users": storage.count("User")})
-
-
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
